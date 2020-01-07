@@ -22,13 +22,15 @@ Each app can define **intent-filters** for its *activities*, *services*, *broadc
 
 ![Caution 2](image-20200107221142576.png)
 
+## Defining intents
+
 `android.intent.action`
 
 `android.intent.extra`
 
-## Snippets
+## Invoking through intents
 
-### Implicit
+### Explicit
 
 ```java
 Intent downloadIntent = new Intent(this, DownloadService.class);
@@ -36,7 +38,11 @@ downloadIntent.setData(Uri.parse(fileUrl));
 startService(downloadIntent);
 ```
 
-### Explicit
+### Implicit
+
+An implicit intent specifies an action that can invoke any app on the device able to perform the action. 
+
+
 
 # Broadcasts
 
@@ -58,7 +64,7 @@ https://developer.android.com/guide/components/broadcasts
 
 # Services
 
-![Caution 3](.\image-20191221225501979.png)
+![Caution 3](image-20191221225501979.png)
 
 # 	Activities
 
