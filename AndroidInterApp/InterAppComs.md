@@ -22,7 +22,7 @@ Each app can define **intent-filters** for its *activities*, *services*, *broadc
 
 ![Caution 2](image-20200107221142576.png)
 
-`android.intent.action`
+`android.intent.action.*`
 
 `android.intent.extra`
 
