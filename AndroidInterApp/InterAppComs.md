@@ -1,32 +1,11 @@
 # Intents and intent filters
 
-> Intents filters - https://developer.android.com/guide/components/intents-filters
-
-> Intents common - https://developer.android.com/guide/components/intents-common
-
-> Android intent hijacking - https://attack.mitre.org/techniques/T1416/
-
-**Intents** are used to invoke *activities*, *services* and *send broadcasts* to another app.
-
-Each app can define **intent-filters** for its *activities*, *services*, *broadcast receivers*.
+- **Intents** are used to invoke *activities*, *services* and *send broadcasts* to another app. 
+- Each app can define **intent-filters** for its *activities*, *services*, *broadcast receivers*.
 
 ## 	Intent types
 
 ![Intent types](image-20191221225317413.png)
-
-
-> https://developer.android.com/guide/components/intents-filters#Receiving
-
-
-![Caution 1](image-20191221230351316.png)
-
-![Caution 2](image-20200107221142576.png)
-
-## Defining intents
-`android.intent.action.*`
-`android.intent.extra`
-
-## Invoking through intents
 
 ### Explicit
 
@@ -52,6 +31,34 @@ if (sendIntent.resolveActivity(getPackageManager()) != null) {
     startActivity(sendIntent);
 }
 ```
+
+![Caution 1](image-20191221230351316.png)
+
+![Caution 2](image-20200107221142576.png)
+
+## Defining intent-filters
+
+### Manifest
+
+`android.intent.action.*`
+
+`android.intent.extra`
+
+### Programmatically
+
+```JAVA
+
+```
+
+## References
+
+> Intents filters - https://developer.android.com/guide/components/intents-filters
+
+> https://developer.android.com/guide/components/intents-filters#Receiving
+
+> Intents common - https://developer.android.com/guide/components/intents-common
+
+> Android intent hijacking - https://attack.mitre.org/techniques/T1416/
 
 # Broadcasts
 
