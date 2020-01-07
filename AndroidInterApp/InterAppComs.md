@@ -23,9 +23,7 @@ Each app can define **intent-filters** for its *activities*, *services*, *broadc
 ![Caution 2](image-20200107221142576.png)
 
 ## Defining intents
-
-`android.intent.action`
-
+`android.intent.action.*`
 `android.intent.extra`
 
 ## Invoking through intents
@@ -42,7 +40,18 @@ startService(downloadIntent);
 
 An implicit intent specifies an action that can invoke any app on the device able to perform the action. 
 
+```java
+// Create the text message with a string
+Intent sendIntent = new Intent();
+sendIntent.setAction(Intent.ACTION_SEND);
+sendIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
+sendIntent.setType("text/plain");
 
+// Verify that the intent will resolve to an activity
+if (sendIntent.resolveActivity(getPackageManager()) != null) {
+    startActivity(sendIntent);
+}
+```
 
 # Broadcasts
 
