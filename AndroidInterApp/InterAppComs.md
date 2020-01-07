@@ -12,15 +12,15 @@ Each app can define **intent-filters** for its *activities*, *services*, *broadc
 
 ## 	Intent types
 
-![Recorte 1](.\image-20191221225317413.png)
+![Intent types](image-20191221225317413.png)
 
 ```
 https://developer.android.com/guide/components/intents-filters#Receiving
 ```
 
-![Recorte 2](.\image-20191221230351316.png)
+![Caution 1](image-20191221230351316.png)
 
-![image-20200107221142576](.\image-20200107221142576.png)
+![Caution 2](image-20200107221142576.png)
 
 `android.intent.action`
 
@@ -58,7 +58,7 @@ https://developer.android.com/guide/components/broadcasts
 
 # Services
 
-![Recorte 3](.\image-20191221225501979.png)
+![Caution 3](.\image-20191221225501979.png)
 
 # 	Activities
 
@@ -86,7 +86,7 @@ https://developer.android.com/training/articles/security-tips#ExternalStorage
 
 # SD card
 
-![image-20191222161735680](.\image-20191222161735680.png)
+![SD Card 1](.\image-20191222161735680.png)
 
 **So, any app with READ|WRITE_EXTERNAL_STORAGE can tamper with data stored on the sd card. Data in shared storage can be accessed by any app without special permissions.**
 
