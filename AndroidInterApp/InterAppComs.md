@@ -1,9 +1,8 @@
 # Intents and intent filters
 
-- **Intents** are used to invoke *activities*, *services* and *send broadcasts* to another app. 
-- Each app can define **intent-filters** for its *activities*, *services*, *broadcast receivers*.
+## 	Invoking components through intents
 
-## 	Intent types
+**Intents** are used to invoke *activities*, *services* and *send broadcasts* to another app. 
 
 ![Intent types](image-20191221225317413.png)
 
@@ -14,6 +13,10 @@ Intent downloadIntent = new Intent(this, DownloadService.class);
 downloadIntent.setData(Uri.parse(fileUrl));
 startService(downloadIntent);
 ```
+
+> **Note:** An explicit intent is always delivered to its target, regardless of any intent filters the component declares.
+
+> Using an intent filter isn't a secure way to prevent other apps from starting your components. Although intent filters restrict a component to respond to only certain kinds of implicit intents, another app can potentially start your app component by using an explicit intent if the developer determines your component names. If it's important that *only your own app* is able to start one of your components, do not declare intent filters in your manifest. Instead, set the [`exported`](https://developer.android.com/guide/topics/manifest/activity-element.html#exported) attribute to `"false"` for that component.
 
 ### Implicit
 
@@ -36,9 +39,19 @@ if (sendIntent.resolveActivity(getPackageManager()) != null) {
 
 ![Caution 2](image-20200107221142576.png)
 
+### Data
+
+### Actions
+
+### Category
+
 ## Defining intent-filters
 
+Each app can define **intent-filters** for its *activities*, *services*, *broadcast receivers*.
+
 ### Manifest
+
+By default any activity that does not have the attribute `exported="false"` explicitly could be invoked **implicitly** if it defines any action filter.
 
 `android.intent.action.*`
 
@@ -78,9 +91,13 @@ https://developer.android.com/guide/components/broadcasts
 -  It is not possible for other applications to send these broadcasts to your app, so you don't need to worry about having security holes they can exploit. 
 -  It is more efficient than sending a global broadcast through the system. 
 
+## Listening for broadcasts
+
 # Services
 
 ![Caution 3](image-20191221225501979.png)
+
+**Note**: To avoid inadvertently running a different app's `Service`, always use an explicit intent to start your own service.
 
 # 	Activities
 
