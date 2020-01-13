@@ -107,9 +107,80 @@ Setup an activity's intent-filter to receive simple data from other Apps - https
 
 # Content Provider
 
-https://developer.android.com/reference/android/content/ContentProvider.html
+## Permissions
 
-`extends ContentProvider`
+A provider's application can specify permissions that other applications must have in order to    access the provider's data. These permissions ensure that the user knows what data    an application will try to access. Based on the provider's requirements, other applications    request the permissions they need in order to access the provider. End users see the requested    permissions when they install the application.
+
+​    If a provider's application doesn't specify any permissions, then other applications have no    access to the provider's data. However, components in the provider's application always have    full read and write access, regardless of the specified permissions.
+
+------
+
+**Note:** To access a provider, your application usually has to request specific    permissions in its manifest file. This development pattern is described in more detail in the  section [Content Provider Permissions](https://developer.android.com/guide/topics/providers/content-provider-basics#Permissions).
+
+------
+
+`extends ContentProvider `
+
+`public static final Uri CONTENT_URI = Uri.parse("content://"`
+
+## Empty content provider
+
+```java
+/*
+ * Copyright (C) 2008 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.frameworks.coretests.enabled_app;
+
+import android.content.ContentProvider;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
+
+/**
+ * Empty ContentProvider for testing
+ */
+
+public class DisabledProvider extends ContentProvider {
+
+    public boolean onCreate() {
+        return false;
+    }
+
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
+        return null;
+    }
+
+    public String getType(Uri uri) {
+        return null;
+    }
+
+    public Uri insert(Uri uri, ContentValues values) {
+        return null;
+    }
+
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
+        return 0;
+    }
+
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        return 0;
+    }
+}
+```
 
 # Media Store
 
@@ -148,3 +219,5 @@ https://developer.android.com/training/data-storage/shared/documents-files
 https://www.usenix.org/system/files/conference/usenixsecurity15/sec15-paper-ren-chuangang.pdf
 
 > Allow install on sd card - https://developer.android.com/guide/topics/data/install-location
+
+> Content Providers - https://developer.android.com/guide/topics/providers/content-provider-basics
