@@ -119,67 +119,48 @@ A provider's application can specify permissions that other applications must ha
 
 ------
 
+## Finding APPs Content Providers
+
+**Content Providers implements the backend that provides the data.**
+
+> Content Providers on base framework - https://github.com/aosp-mirror/platform_frameworks_base/tree/6bebb8418ceecf44d2af40033870f3aabacfe36e/core/java/android/provider
+
 `extends ContentProvider `
+
+`"content://"`
 
 `public static final Uri CONTENT_URI = Uri.parse("content://"`
 
-## Empty content provider
+`import android.content.ContentProvider;`
 
-```java
-/*
- * Copyright (C) 2008 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+## Finding APPs Content Resolvers
 
-package com.android.frameworks.coretests.enabled_app;
+**Content Resolvers implements a client for a Content Provider.**
 
-import android.content.ContentProvider;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.net.Uri;
+> Content Resolvers on base framework - https://github.com/aosp-mirror/platform_frameworks_base/tree/6bebb8418ceecf44d2af40033870f3aabacfe36e/core/java/android/content
 
-/**
- * Empty ContentProvider for testing
- */
+`import android.content.ContentResolver;`
 
-public class DisabledProvider extends ContentProvider {
+`import android.provider.`
 
-    public boolean onCreate() {
-        return false;
-    }
+`extends ContentResolver`
 
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
-                        String sortOrder) {
-        return null;
-    }
+`Cursor query(`
 
-    public String getType(Uri uri) {
-        return null;
-    }
+## Finding APPs queries to Content Providers
 
-    public Uri insert(Uri uri, ContentValues values) {
-        return null;
-    }
+`ActivityCompat.shouldShowRequestPermissionRationale`
 
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
-    }
+`ActivityCompat.requestPermissions`
 
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
-    }
-}
+`onRequestPermissionsResult`
+
+`getContentResolver();`
+
+## Testing a content provider
+
+```bash
+adb shell 'content write --uri content://settings/system/ringtone_cache' < host.ogg
 ```
 
 # Media Store
@@ -221,3 +202,5 @@ https://www.usenix.org/system/files/conference/usenixsecurity15/sec15-paper-ren-
 > Allow install on sd card - https://developer.android.com/guide/topics/data/install-location
 
 > Content Providers - https://developer.android.com/guide/topics/providers/content-provider-basics
+
+> Android Open Source Project - https://github.com/aosp-mirror/platform_frameworks_base
