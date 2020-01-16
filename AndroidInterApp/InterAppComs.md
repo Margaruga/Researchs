@@ -1,3 +1,93 @@
+# Activities
+
+* All activities are declared on the **Manifest**.
+
+* You can invoke any activity from another App through an **intent** using its **explicit name** (unless they are defined with `exported="false"`)
+
+* Activities might define **intent-filters** in order to be eligible to perform an action when another App launches an **implicit intent**. An activity with an intent-filter is **auto-exported** (unless `exported="false"`)
+
+## Activity declaration
+
+```xml
+<activity android:name=".ExampleActivity" android:icon="@drawable/app_icon">
+    <intent-filter>
+        <action android:name="android.intent.action.SEND" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:mimeType="text/plain" />
+    </intent-filter>
+</activity>
+```
+
+## Invoking the activity with an implicit intent
+
+```java
+// Create the text message with a string
+Intent sendIntent = new Intent();
+sendIntent.setAction(Intent.ACTION_SEND);
+sendIntent.setType("text/plain");
+sendIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
+// Start the activity
+startActivity(sendIntent);
+```
+
+**Activity permissions** - https://developer.android.com/guide/components/activities/intro-activities.html#dp
+
+## Security Recommendations
+
+### You start an activity
+
+* Be careful with **implicit intents**.
+* Always use **explicit intents for your own components.**
+* Do not put sensitive data on **implicit intents**.
+
+**Relevant methods**
+
+`startActivity()`
+
+### Your activity is started
+
+* Exported activities can be started by other apps on the device which may break user
+  workflow assumptions, including ways that break security boundaries.
+* The activity uses **the data from the intent** to perform some sensitive action.
+
+**Relevant methods**
+
+`getIntent()`
+
+`intent.getExtra()`
+
+# Services
+
+A *service* is a general-purpose entry point for keeping an app running in the background for all kinds of reasons. 
+
+There are actually **two very distinct semantics services** tell the system about how to manage an app:
+
+- Started services tell the system to keep them running until their work is completed.
+- **Bound services** run because some other app (or the system) has said that it wants to make use of the service.  This is basically the service providing an API to another process.  The system thus knows there is a dependency between these processes, so if process A is bound to a service in process B, it knows that it needs to keep process B (and its service) running for A.
+
+## Security Recommendations
+
+![Caution 3](image-20191221225501979.png)
+
+### You start a service
+
+* Always use an **explicit intent**.
+
+**Relevant methods**
+
+`bindService()`
+
+`startService()`
+
+### Your service is started
+
+* Do not declare **intent filters** for your services. 
+* Declare your services with `exported="false"`.
+
+# Broadcast Receivers
+
+# Content Providers
+
 # Intents and intent filters
 
 ## 	Invoking components through intents
@@ -39,11 +129,10 @@ if (sendIntent.resolveActivity(getPackageManager()) != null) {
 
 ![Caution 2](image-20200107221142576.png)
 
-### Data
-
-### Actions
-
-### Category
+* Data
+* Actions
+* Category
+* Type
 
 ## Defining intent-filters
 
@@ -92,12 +181,6 @@ https://developer.android.com/guide/components/broadcasts
 -  It is more efficient than sending a global broadcast through the system. 
 
 ## Listening for broadcasts
-
-# Services
-
-![Caution 3](image-20191221225501979.png)
-
-**Note**: To avoid inadvertently running a different app's `Service`, always use an explicit intent to start your own service.
 
 # 	Activities
 
@@ -188,6 +271,8 @@ https://developer.android.com/training/data-storage
 https://developer.android.com/training/data-storage/shared/documents-files
 
 # References
+
+https://developer.android.com/guide/components/fundamentals
 
 > Security tips - https://developer.android.com/training/articles/security-tips
 
