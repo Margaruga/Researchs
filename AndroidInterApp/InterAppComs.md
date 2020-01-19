@@ -225,6 +225,16 @@ There are actually **two very distinct semantics services** tell the system abou
 
   `public static final Uri CONTENT_URI = Uri.parse("content://"`
 
+## Permissions
+
+A provider's application can specify permissions that other applications must have in order to    access the provider's data. These permissions ensure that the user knows what data    an application will try to access. Based on the provider's requirements, other applications    request the permissions they need in order to access the provider. End users see the requested    permissions when they install the application.
+
+**If a provider's application doesn't specify any permissions, then other applications have no  access to the provider's data.** However, components in the provider's application always have full read and write access, regardless of the specified permissions.
+
+## Security Recommendations
+
+* Use **parametrized queries.**
+
 ## References
 
 * https://github.com/aosp-mirror/platform_frameworks_base/tree/6bebb8418ceecf44d2af40033870f3aabacfe36e/core/java/android/provider
@@ -317,9 +327,11 @@ Each App can define **intent-filters** for its *activities*, *services*, *broadc
 
 # Media Store
 
-https://developer.android.com/reference/android/provider/MediaStore.html
-
 `MediaStore`
+
+## References
+
+* https://developer.android.com/reference/android/provider/MediaStore.html
 
 # External Storage
 
@@ -335,6 +347,8 @@ https://developer.android.com/training/articles/security-tips#ExternalStorage
 
 # Shared storage
 
-https://developer.android.com/training/data-storage
+## References
 
-https://developer.android.com/training/data-storage/shared/documents-files
+* https://developer.android.com/training/data-storage
+
+* https://developer.android.com/training/data-storage/shared/documents-files
