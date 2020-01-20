@@ -1,19 +1,26 @@
 # Components
 
-* Activities `<activity>`
-* Services `<service>`
-* Broadcast Receivers `<receiver>`
-* Content Providers `<provider>`
+1. Activities `<activity>`
+2. Services `<service>`
+3. Broadcast Receivers `<receiver>`
+4. Content Providers `<provider>`
 
-A component is *exported* if:
+Activities, Services and Receivers are *exported* if:
 
 * exported="true"
 * intent-filter *and not* exported="false" (*implicitly exported*)
 
-You can not invoke a component if:
+You can not invoke them if:
 
 * exported="false"
 * *not* intent-filter *and not* exported="true"
+
+Regarding Content Providers:
+
+* Exported by default on API Level < 17.
+* exported="false" by default on API Level > 17.
+
+In addition to being exported, components can add **permissions requirements** needed in order to interact with them.
 
 # Permissions
 
@@ -213,32 +220,31 @@ There are actually **two very distinct semantics services** tell the system abou
 
 * **Content Providers** implements the backend that provides the data.
 
-* Can be declared on the Manifest `<provider>`
+* Declared on the Manifest `<provider>`
 
-* How to spot content providers:
-
-  `import android.content.ContentProvider;`
+* Implements `import android.content.ContentProvider;`
 
   `extends ContentProvider `
 
-  `"content://"`
-
-  `public static final Uri CONTENT_URI = Uri.parse("content://"`
-
 ## Permissions
 
-A provider's application can specify permissions that other applications must have in order to    access the provider's data. These permissions ensure that the user knows what data    an application will try to access. Based on the provider's requirements, other applications    request the permissions they need in order to access the provider. End users see the requested    permissions when they install the application.
+A provider's application can specify permissions that other applications must have in order to    access the provider's data. These permissions ensure that the user knows what data    an application will try to access. Based on the provider's requirements, other applications    request the permissions they need in order to access the provider. End users see the requested  permissions when they install the application.
 
 **If a provider's application doesn't specify any permissions, then other applications have no  access to the provider's data.** However, components in the provider's application always have full read and write access, regardless of the specified permissions.
+
+All applications can read from or write to your provider, even if the underlying data is private, because by default your provider does not have permissions set. To change this, set permissions for your provider in your manifest file, using attributes or child elements of the `<provider>` element.  **(API LEVEL < 17)**
 
 ## Security Recommendations
 
 * Use **parametrized queries.**
+* Be careful with **path traversal** in functions like *openFile*.
 
 ## References
 
+* https://developer.android.com/guide/topics/manifest/provider-element
 * https://github.com/aosp-mirror/platform_frameworks_base/tree/6bebb8418ceecf44d2af40033870f3aabacfe36e/core/java/android/provider
 * https://developer.android.com/guide/topics/providers/content-provider-basics#Permissions
+* https://developer.android.com/guide/topics/providers/content-provider-creating#implementing-permissions
 
 # Content Resolvers
 
