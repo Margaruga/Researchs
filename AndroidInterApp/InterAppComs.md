@@ -7,7 +7,7 @@
 
 Activities, Services and Receivers are *exported* if:
 
-* exported="true"
+* *exported="true"*
 * intent-filter *and not* exported="false" (*implicitly exported*)
 
 You can not invoke them if:
@@ -17,8 +17,8 @@ You can not invoke them if:
 
 Regarding Content Providers:
 
-* Exported by default on API Level < 17.
-* exported="false" by default on API Level > 17.
+* Exported by default on **API Level < 17**.
+* *exported="false"* by default on **API Level > 17**.
 
 In addition to being exported, components can add **permissions requirements** needed in order to interact with them.
 
