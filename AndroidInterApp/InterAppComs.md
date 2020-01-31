@@ -119,6 +119,13 @@ If you must create a new permission, consider whether you can accomplish your ta
 
 # Activities
 
+Just as the “window” is the main building block of all visual interaction in window-based GUI systems, activities are the main building block in an Android app. Unlike  a window, however, activities cannot be “maximized,” “minimized,” or “resized.” 
+Instead, activities always take the entirety of the visual area and are made to be stacked on top of one another in the same way as a browser remembers web pages in the sequence they were accessed, allowing the user to go back to where he was previously. In fact, as described in the previous chapter, all Android devices have a Back button, whether it be a physical button on the device or a soft button displayed onscreen, to make this behavior available to the user. In contrast to web browsing, though, there is no button corresponding to the “forward” browsing action; only “back” is possible.
+
+One globally defined Android intent allows an activity to be displayed as an icon on the app launcher (the main app list on the device). Because the vast majority of apps want to appear on the main app list, they provide at least one activity that is defined as capable of responding to that intent. Typically, the user will start from a particular activity and move through several others and end up creating a stack of activities all related to the original one they launched; this stack of activities is called a task. The user can then switch to another task by clicking the Home button and starting another activity stack from the app launcher. 
+
+## Bulletpoints
+
 * All activities are declared on the **Manifest**.
 
 
@@ -171,6 +178,8 @@ startActivity(sendIntent);
 
 # Services
 
+Android services are akin to background processes or daemons in the Unix world. Essentially, a service is activated when another component requires its services and typically remains active for the duration required by its caller. Most importantly, though, services can be made available to components outside an app, thereby exposing some of that app’s core functionality to other apps. There is usually no visual sign of a service being active. 
+
 A *service* is a general-purpose entry point for keeping an App running in the background for all kinds of reasons. 
 
 There are actually **two very distinct semantics services** tell the system about how to manage an App:
@@ -199,6 +208,10 @@ There are actually **two very distinct semantics services** tell the system abou
 
 # Broadcast Receivers
 
+Broadcast receivers are akin to interrupt handlers. When a key event occurs, a broadcast receiver is triggered to handle that event on the app’s behalf. For instance, an app might want to be notified when the battery level is low or when “airplane mode” (to shut down the wireless connections) has been activated. When not handling a specific event for which they are registered, broadcast receivers are otherwise inactive. 
+
+## Bulletpoints
+
 * Can be declared on the Manifest `<receiver>`
 * Programmatically with `registerReceiver()`
 
@@ -217,6 +230,10 @@ There are actually **two very distinct semantics services** tell the system abou
 `LocalBroadcastManager.sendBroadcast`
 
 # Content Providers
+
+Content providers are essentially databases. Usually, an app will include a content  provider if it needs to make its data accessible to other apps. If you’re building a  Twitter client app, for instance, you could give other apps on the device access to  the tweet feed you’re presenting to the user through a content provider. All content  providers present the same API to apps, regardless of how they are actually implemented internally. Most content providers rely on the SQLite functionality included  in Android, but they can also use files or other types of storage. 
+
+## Bulletpoints
 
 * **Content Providers** implements the backend that provides the data.
 
